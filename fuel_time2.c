@@ -21,5 +21,18 @@ double read_pressure(double voltage) {
     double pressao_absoluta = (vout / 1.0) * inclinacao / (3.3 / (r1 + r2)) + 13.3;
     return pressao_absoluta * 1000; // Converter kPa para Pa
 }
+  double read_fuel_pressure(double voltage) {
+    double r1 = 2200; // valor de R1 em ohms
+    double r2 = 4700; // valor de R2 em ohms
+  // Calcular a tensão no sensor considerando o divisor de tensão r1-r2
+    double sensor_voltage = voltage * (r1 + r2) / r2;
+
+  // Calcular a pressão de combustível com base na curva característica do sensor
+    double pressure = (sensor_voltage - 0.5) / 4.0 * 10.0;
+
+  // Retornar o valor em bar
+  return pressure;
+}
+
 
 };
