@@ -13,4 +13,13 @@ public:
 
     return t_inj;
   }
+double read_pressure(double voltage) {
+    double r1 = 2200; // valor de R1 em ohms
+    double r2 = 4700; // valor de R2 em ohms
+    double inclinacao = 93.3;
+    double vout = voltage * r2 / (r1 + r2);
+    double pressao_absoluta = (vout / 1.0) * inclinacao / (3.3 / (r1 + r2)) + 13.3;
+    return pressao_absoluta * 1000; // Converter kPa para Pa
+}
+
 };
